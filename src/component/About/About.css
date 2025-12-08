@@ -1,0 +1,68 @@
+.luxury-about {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.luxury-about-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.luxury-about-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.particle {
+  position: absolute;
+  background: #d4af37;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.luxury-about-content {
+  position: relative;
+  z-index: 4;
+  max-width: 700px;
+  text-align: center;
+  padding: 2rem;
+}
+
+.luxury-about-content h2 {
+  font-size: 3rem;
+  color: #d4af37;
+  margin-bottom: 1rem;
+}
+
+.luxury-about-content p {
+  color: #fff;
+  margin: 1rem 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.about-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  background-color: #bfa14b;
+  color: #000;
+  font-weight: bold;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(212,175,55,0.7);
+}

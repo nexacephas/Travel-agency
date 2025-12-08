@@ -1,0 +1,77 @@
+.luxury-services {
+  padding: 6rem 2rem;
+  background: #000;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  overflow: hidden;
+}
+
+.luxury-services-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.luxury-services-header h2 {
+  font-size: 2.5rem;
+  color: #d4af37;
+}
+
+.luxury-services-header p {
+  color: #ccc;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.luxury-services-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.service-slice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  transition: all 0.4s ease;
+}
+
+.service-slice h3 {
+  margin-top: 1rem;
+  font-size: 1.8rem;
+  color: #d4af37;
+}
+
+.service-slice p {
+  color: #ddd;
+  text-align: center;
+  max-width: 500px;
+  margin-top: 1rem;
+}
+
+.service-icon {
+  color: #d4af37;
+  background: rgba(212,175,55,0.1);
+  padding: 1rem;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(212,175,55,0.3);
+  margin-bottom: 1rem;
+}
+
+/* Alternate slices tilt effect */
+.slice-1 { clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%); }
+.slice-3 { clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 100%); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .luxury-services-container {
+    gap: 2rem;
+  }
+  .service-slice {
+    padding: 3rem 1.5rem;
+  }
+}
