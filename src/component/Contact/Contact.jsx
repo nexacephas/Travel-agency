@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./Contact.css";
 
+import { useLanguage } from "../../context/LanguageContext";
+
 export default function Contact() {
+  const { t } = useLanguage();
   const [form, setForm] = useState({ name: "", email: "", request: "" });
   const [status, setStatus] = useState(null);
 
@@ -36,29 +39,29 @@ export default function Contact() {
   return (
     <section className="contact">
       <div className="contact-inner">
-        <h2 className="contact-heading">Contact / Get Started</h2>
-        <p className="contact-lead">Name, email and a short flight request — we’ll take it from there. Expect a response within 24 hours.</p>
+        <h2 className="contact-heading">{t("contact.heading")}</h2>
+        <p className="contact-lead">{t("contact.lead")}</p>
 
         <div className="contact-grid">
           <form className="contact-form" onSubmit={handleSubmit}>
             <label>
-              Name
+              {t("contact.name")}
               <input name="name" value={form.name} onChange={handleChange} placeholder="Your full name" />
             </label>
 
             <label>
-              Email
+              {t("contact.email")}
               <input name="email" value={form.email} onChange={handleChange} placeholder="you@example.com" />
             </label>
 
             <label>
-              Flight request
+              {t("contact.request")}
               <textarea name="request" value={form.request} onChange={handleChange} placeholder="Route, dates, preferences..." rows={4} />
             </label>
 
             <div className="contact-actions">
-              <button type="submit" className="btn-primary">Send Request</button>
-              <a className="btn-ghost" href="https://calendly.com/" target="_blank" rel="noreferrer">Book a Call</a>
+              <button type="submit" className="btn-primary">{t("contact.send")}</button>
+              <a className="btn-ghost" href="https://calendly.com/" target="_blank" rel="noreferrer">{t("contact.book")}</a>
             </div>
 
             {status && (

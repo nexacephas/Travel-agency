@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FiFacebook, FiInstagram, FiTwitter, FiLinkedin } from "react-icons/fi";
+import { FiFacebook, FiInstagram, FiTwitter, FiLinkedin, FiChevronUp } from "react-icons/fi";
 import "./Footer.css";
 
 const Footer = () => {
@@ -87,6 +87,14 @@ const Footer = () => {
         transition={{ duration: 1 }}
       >
         <p>© {new Date().getFullYear()} Luxury Concierge. All Rights Reserved.</p>
+        <button
+          className="footer-top-btn"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label="Back to top"
+          title="Back to top"
+        >
+          <FiChevronUp size={18} />
+        </button>
       </motion.div>
     </footer>
   );

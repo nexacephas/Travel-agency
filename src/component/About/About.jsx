@@ -1,5 +1,6 @@
 import React from "react";
 import "./About.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const TEAM = [
   { name: "Isabelle Durand", role: "Founder & CEO" },
@@ -8,35 +9,36 @@ const TEAM = [
 ];
 
 export default function About() {
+  const { t } = useLanguage();
   return (
     <section className="about">
       <div className="about-inner">
-        <h2 className="about-heading">About Us</h2>
-        <p className="about-mission">Our mission is to make premium air travel accessible — negotiating exclusive fares and delivering white‑glove service so you travel better for less.</p>
+        <h2 className="about-heading">{t("about.heading")}</h2>
+        <p className="about-mission">{t("about.mission")}</p>
 
         <div className="about-grid">
           <div className="about-block">
-            <h3>Why we exist</h3>
-            <p>Traditional premium fares are often overpriced or opaque. We partner directly with airlines to open exclusive inventory and deliver transparent savings to discerning travellers.</p>
+            <h3>{t("about.whyTitle")}</h3>
+            <p>{t("about.blocks.0.body")}</p>
           </div>
 
           <div className="about-block">
-            <h3>Expertise & Relationships</h3>
-            <p>Our team has decades of experience across airline revenue, inventory and corporate sales. Those relationships let us secure privileged fares, upgrades and special access on behalf of our clients.</p>
+            <h3>{t("about.expertiseTitle")}</h3>
+            <p>{t("about.blocks.1.body")}</p>
           </div>
 
           <div className="about-block">
-            <h3>What we promise</h3>
+            <h3>{t("about.promiseTitle")}</h3>
             <ul>
-              <li>Transparent pricing and clear savings</li>
-              <li>Dedicated concierge for every booking</li>
-              <li>Fast response times and priority handling</li>
+              <li>{t("about.promiseList.item1")}</li>
+              <li>{t("about.promiseList.item2")}</li>
+              <li>{t("about.promiseList.item3")}</li>
             </ul>
           </div>
         </div>
 
         <div className="about-team">
-          <h3>Team</h3>
+          <h3>{t("about.teamTitle")}</h3>
           <div className="team-grid">
             {TEAM.map((m, i) => (
               <div className="team-card" key={i}>

@@ -1,5 +1,6 @@
 import React from "react";
 import "./Pricing.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const EXAMPLES = [
   { from: "Paris (CDG)", to: "New York (JFK)", standard: 1200, our: 540, currency: "€" },
@@ -20,11 +21,12 @@ function computeSavings(item) {
 }
 
 export default function Pricing() {
+  const { t } = useLanguage();
   return (
     <section className="pricing">
       <div className="pricing-inner">
-        <h2 className="pricing-heading">Pricing & Example Savings</h2>
-        <p className="pricing-lead">See immediate savings on example routes — transparent and guaranteed.</p>
+        <h2 className="pricing-heading">{t("pricing.heading")}</h2>
+        <p className="pricing-lead">{t("pricing.lead")}</p>
 
         <div className="pricing-grid">
           {EXAMPLES.map((ex, i) => {
@@ -43,13 +45,13 @@ export default function Pricing() {
         </div>
 
         <div className="tiers">
-          <h3>Membership & Packages</h3>
+          <h3>{t("pricing.tiersHeading")}</h3>
           <div className="tiers-grid">
-            {TIERS.map((t) => (
-              <div className="tier" key={t.key}>
-                <div className="tier-title">{t.title}</div>
-                <div className="tier-price">{t.price}</div>
-                <p className="tier-desc">{t.desc}</p>
+            {TIERS.map((tItem) => (
+              <div className="tier" key={tItem.key}>
+                <div className="tier-title">{tItem.title}</div>
+                <div className="tier-price">{tItem.price}</div>
+                <p className="tier-desc">{tItem.desc}</p>
               </div>
             ))}
           </div>

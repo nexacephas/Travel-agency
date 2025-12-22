@@ -7,35 +7,20 @@ import "./Navbar.css";
 // Sections of the page
 const SECTIONS = ["about", "services", "steps", "contact"];
 
-// Multi-language text
-const TEXT = {
-  EN: {
-    about: "About",
-    services: "Services",
-    steps: "Process",
-    contact: "Contact",
-    cta: "Book Appointment",
-  },
-  FR: {
-    about: "À propos",
-    services: "Services",
-    steps: "Processus",
-    contact: "Contact",
-    cta: "Réserver",
-  },
-};
+import { useLanguage } from "../../context/LanguageContext";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [language, setLanguage] = useState(() => localStorage.getItem("language") || "EN");
+  const { lang, setLang, t } = useLanguage();
 
-  /* Persist language to localStorage */
-  const changeLanguage = (lang) => {
-    setLanguage(lang);
-    localStorage.setItem("language", lang);
-  };
+  useEffect(() => {
+    if (lang !== language) setLanguage(lang);
+  }, [lang]);
+
+  const changeLanguage = (l) => setLang(l);
 
   /* Scroll detection + active section */
   useEffect(() => {
@@ -93,7 +78,7 @@ const Navbar = () => {
                   className={`nav-link ${activeSection === id ? "active" : ""}`}
                   onClick={() => handleScrollTo(id)}
                 >
-                  {TEXT[language][id]}
+                  {t(`nav.${id}`) || id}
                 </button>
               </li>
             ))}
@@ -102,14 +87,14 @@ const Navbar = () => {
           {/* Language Switch */}
           <div className="navbar__lang">
             <button
-              className={language === "EN" ? "active" : ""}
+              className={lang === "EN" ? "active" : ""}
               onClick={() => changeLanguage("EN")}
             >
               EN
             </button>
             <span>|</span>
             <button
-              className={language === "FR" ? "active" : ""}
+              className={lang === "FR" ? "active" : ""}
               onClick={() => changeLanguage("FR")}
             >
               FR
@@ -118,7 +103,7 @@ const Navbar = () => {
 
           {/* CTA */}
           <a href="https://wa.me/2340000000000" className="navbar__cta">
-            {TEXT[language].cta}
+            {t("nav.cta")}
           </a>
 
           {/* Mobile Toggle */}
@@ -148,7 +133,7 @@ const Navbar = () => {
                 className={`mobile-link ${activeSection === id ? "active" : ""}`}
                 onClick={() => handleScrollTo(id)}
               >
-                {TEXT[language][id]}
+                {t(`nav.${id}`) || id}
               </button>
             ))}
 

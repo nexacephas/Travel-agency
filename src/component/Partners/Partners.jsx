@@ -1,5 +1,6 @@
 import React from "react";
 import "./Partners.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const PARTNERS = [
   { key: "airlineA", name: "SkyLine Airlines", logo: (
@@ -29,11 +30,12 @@ const PARTNERS = [
 ];
 
 export default function Partners() {
+  const { t } = useLanguage();
   return (
     <section className="partners">
       <div className="partners-inner">
-        <h2 className="partners-heading">Our Airline Partners</h2>
-        <p className="partners-lead">We work with leading carriers to secure exclusive inventory and priority access.</p>
+        <h2 className="partners-heading">{t("partners.heading")}</h2>
+        <p className="partners-lead">{t("partners.lead")}</p>
 
         <div className="partners-grid">
           {PARTNERS.map((p) => (
@@ -45,7 +47,7 @@ export default function Partners() {
         </div>
 
         <div className="partners-cta">
-          <a href="/partners" className="partners-link">See all partners</a>
+          <a href="/partners" className="partners-link">{t("partners.cta")}</a>
         </div>
       </div>
     </section>

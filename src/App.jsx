@@ -1,5 +1,6 @@
 import React from "react";
- import Navbar from "./component/Navbar/Navbar";
+import { LanguageProvider } from "./context/LanguageContext";
+import Navbar from "./component/Navbar/Navbar";
 import Hero from "./component/Hero/Hero";
 import About from "./component/About/About";
 import Services from "./component/Services/Services";
@@ -10,22 +11,26 @@ import Whyus from "./component/Why Us/Whyus";
 import Partners from "./component/Partners/Partners";
 import Pricing from "./component/Pricing/Pricing";
 import Testimonials from "./component/Testimonials/Testimonials";
+import StickyContact from "./component/StickyContact/StickyContact";
 function App() {
 return (
-<>
-<Navbar />
-<Hero />
-<Whyus />
-<Steps />
-<Partners />
-<Pricing />
-<Testimonials />
-<About />
- <Services />
+	<LanguageProvider>
+		<>
+			<Navbar />
+			<Hero />
+			<Whyus />
+			<Steps />
+			<Partners />
+			<Pricing />
+			<Testimonials />
+			<About />
+			<Services />
 
-<Contact />
-<Footer /> 
-</>
+			<Contact />
+			<StickyContact />
+			<Footer /> 
+		</>
+	</LanguageProvider>
 );
 }
 

@@ -1,32 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import HeroVideo from "../../assets/32945-395456395_medium.mp4";
+import HeroVideo from "../../assets/2888119-hd_1920_1080_24fps.mp4";
 import "./Hero.css";
 
 // Particle configuration
 const PARTICLE_COUNT = 40;
 
-// Multi-language text
-const TEXT = {
-  EN: {
-    title: "Fly Premium for 30–70% Less",
-    subtitle: "We negotiate directly with airlines to give you the best fares, without compromise.",
-    cta: "Get Your Flight",
-  },
-  FR: {
-    title: "Volez Premium pour 30–70% de moins",
-    subtitle: "Nous négocions directement avec les compagnies aériennes pour vous offrir les meilleurs tarifs, sans compromis.",
-    cta: "Réservez Votre Vol",
-  },
-};
+import { useLanguage } from "../../context/LanguageContext";
 
 const LuxuryHero = ({ language = "EN" }) => {
   const [offsetY, setOffsetY] = useState(0);
   const [particles, setParticles] = useState([]);
 
-  // Ensure language key is valid and normalized
-  const langKey = typeof language === "string" ? language.toUpperCase() : "EN";
-  const lang = TEXT[langKey] ? langKey : "EN";
+  const { lang, t } = useLanguage();
 
   // Parallax scroll effect
   useEffect(() => {
@@ -94,7 +80,7 @@ const LuxuryHero = ({ language = "EN" }) => {
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          {TEXT[lang].title}
+          {t("hero.title")}
         </motion.h1>
 
         <motion.p
@@ -103,7 +89,7 @@ const LuxuryHero = ({ language = "EN" }) => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 1 }}
         >
-          {TEXT[lang].subtitle}
+          {t("hero.subtitle")}
         </motion.p>
 
         <motion.a
@@ -112,7 +98,7 @@ const LuxuryHero = ({ language = "EN" }) => {
           whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(212,175,55,0.8)", backgroundColor: "#d4af37" }}
           whileTap={{ scale: 0.95 }}
         >
-          {TEXT[lang].cta}
+          {t("hero.cta")}
         </motion.a>
       </motion.div>
     </section>
