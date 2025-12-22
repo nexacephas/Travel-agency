@@ -1,23 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import HeroVideo1 from "../../assets/282-135881196_medium.mp4";
+import HeroVideo from "../../assets/32945-395456395_medium.mp4";
 import "./Hero.css";
 
-const particlesCount = 40;
+// Particle configuration
+const PARTICLE_COUNT = 40;
 
-const LuxuryHero = () => {
+// Multi-language text
+const TEXT = {
+  EN: {
+    title: "Fly Premium for 30–70% Less",
+    subtitle: "We negotiate directly with airlines to give you the best fares, without compromise.",
+    cta: "Get Your Flight",
+  },
+  FR: {
+    title: "Volez Premium pour 30–70% de moins",
+    subtitle: "Nous négocions directement avec les compagnies aériennes pour vous offrir les meilleurs tarifs, sans compromis.",
+    cta: "Réservez Votre Vol",
+  },
+};
+
+const LuxuryHero = ({ language = "EN" }) => {
   const [offsetY, setOffsetY] = useState(0);
   const [particles, setParticles] = useState([]);
 
+  // Ensure language key is valid and normalized
+  const langKey = typeof language === "string" ? language.toUpperCase() : "EN";
+  const lang = TEXT[langKey] ? langKey : "EN";
+
+  // Parallax scroll effect
   useEffect(() => {
     const handleScroll = () => setOffsetY(window.scrollY);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Generate random particles
   useEffect(() => {
     const arr = [];
-    for (let i = 0; i < particlesCount; i++) {
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
       arr.push({
         left: Math.random() * 100 + "%",
         top: Math.random() * 100 + "%",
@@ -37,17 +58,18 @@ const LuxuryHero = () => {
         loop
         muted
         playsInline
-        src={HeroVideo1}
+        src={HeroVideo}
         style={{ y: offsetY * 0.3 }}
       />
 
+      {/* Overlay */}
       <div className="luxury-hero-overlay"></div>
 
       {/* Floating particles */}
       {particles.map((p, i) => (
         <motion.div
-          className="particle"
           key={i}
+          className="particle"
           style={{
             left: p.left,
             top: p.top,
@@ -59,7 +81,7 @@ const LuxuryHero = () => {
         />
       ))}
 
-      {/* Animated content */}
+      {/* Hero content */}
       <motion.div
         className="luxury-hero-content"
         initial={{ opacity: 0, y: 50 }}
@@ -72,7 +94,7 @@ const LuxuryHero = () => {
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          Your Personal Concierge
+          {TEXT[lang].title}
         </motion.h1>
 
         <motion.p
@@ -81,17 +103,16 @@ const LuxuryHero = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 1 }}
         >
-          Premium lifestyle management, anytime. Exceptional service,
-          personalized for you.
+          {TEXT[lang].subtitle}
         </motion.p>
 
         <motion.a
           href="#services"
           className="hero-btn"
-          whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(212,175,55,0.8)", backgroundColor: "#d4af37" }}
+          whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(212,175,55,0.8)", backgroundColor: "#d4af37" }}
           whileTap={{ scale: 0.95 }}
         >
-          Explore Services
+          {TEXT[lang].cta}
         </motion.a>
       </motion.div>
     </section>

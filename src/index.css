@@ -1,44 +1,105 @@
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap');
-/* index.css */
-@import url('https://unpkg.com/leaflet/dist/leaflet.css');
+/* ==============================
+   GOOGLE FONTS
+================================ */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap');
 
-/* Apply globally */
+/* ==============================
+   DESIGN TOKENS
+================================ */
+:root {
+  --color-black: #0b0b0b;
+  --color-white: #ffffff;
+  --color-gold: #d4af37;
+  --color-gold-light: #f5e6a1;
+  --color-gray: #b5b5b5;
+
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Lato', sans-serif;
+
+  --container-width: 1200px;
+}
+
+/* ==============================
+   RESET & BASE
+================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Lato', sans-serif;
-  color: #fff;
-  background-color: #000;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-white);
+  background-color: var(--color-black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* ==============================
+   TYPOGRAPHY
+================================ */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-weight: 700;
+  margin: 0 0 20px 0;
+  letter-spacing: 0.3px;
 }
-/* Webkit browsers (Chrome, Safari, Edge) */
+
+p {
+  margin: 0 0 16px 0;
+  color: var(--color-gray);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ==============================
+   SCROLLBAR (LUXURY STYLE)
+================================ */
+/* Webkit */
 ::-webkit-scrollbar {
-  width: 10px; /* thin scrollbar */
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2); /* subtle dark track */
-  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.25);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #d4af37, #f5e6a1); /* gold gradient */
+  background: linear-gradient(
+    180deg,
+    var(--color-gold),
+    var(--color-gold-light)
+  );
   border-radius: 10px;
   transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #f5e6a1, #d4af37); /* invert gradient on hover */
-  box-shadow: 0 0 10px rgba(212,175,55,0.8); /* glowing effect */
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #d4af37 rgba(0,0,0,0.2);
+  scrollbar-color: var(--color-gold) rgba(0,0,0,0.25);
+}
+
+/* ==============================
+   SELECTION
+================================ */
+::selection {
+  background: var(--color-gold);
+  color: var(--color-black);
 }

@@ -5,10 +5,26 @@ import "./Steps.css";
 import TimelineVideo from "../../assets/32945-395456395_medium.mp4"; // your video
 
 const stepsData = [
-  { icon: <FiUserCheck size={28} />, title: "Consultation", description: "Meet with your personal concierge to understand your unique needs and preferences." },
-  { icon: <FiCalendar size={28} />, title: "Plan & Schedule", description: "Schedule your lifestyle services, events, or trips effortlessly." },
-  { icon: <FiCreditCard size={28} />, title: "Book & Pay", description: "Securely book services with our premium payment options." },
-  { icon: <FiSmile size={28} />, title: "Experience Luxury", description: "Sit back and enjoy your elevated lifestyle fully managed by our experts." }
+  {
+    icon: <FiUserCheck size={28} />,
+    title: "Request your flight",
+    description: "Fill the form or call our concierge to submit your flight request.",
+  },
+  {
+    icon: <FiCalendar size={28} />,
+    title: "We negotiate",
+    description: "We negotiate directly with airlines — typically within a few hours to secure the best fares.",
+  },
+  {
+    icon: <FiCreditCard size={28} />,
+    title: "You fly",
+    description: "Receive your ticket at the best price and enjoy your trip.",
+  },
+  {
+    icon: <FiSmile size={28} />,
+    title: "Optional: VIP service",
+    description: "Add upgrades, lounge access, and special requests for a premium experience.",
+  },
 ];
 
 const Steps = () => {
