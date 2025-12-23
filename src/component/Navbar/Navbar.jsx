@@ -3,26 +3,16 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { GiCrown } from "react-icons/gi";
 import { motion, AnimatePresence } from "framer-motion";
 import "./Navbar.css";
-
-// Sections of the page
-const SECTIONS = ["about", "services", "steps", "contact"];
-
 import { useLanguage } from "../../context/LanguageContext";
+
+const SECTIONS = ["about", "services", "steps", "contact"];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const [language, setLanguage] = useState(() => localStorage.getItem("language") || "EN");
   const { lang, setLang, t } = useLanguage();
 
-  useEffect(() => {
-    if (lang !== language) setLanguage(lang);
-  }, [lang]);
-
-  const changeLanguage = (l) => setLang(l);
-
-  /* Scroll detection + active section */
   useEffect(() => {
     const onScroll = () => {
       setIsScrolled(window.scrollY > 60);
@@ -40,19 +30,19 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* Lock body scroll when mobile menu is open */
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "auto";
   }, [menuOpen]);
 
-  /* Smooth scroll with sticky offset */
   const handleScrollTo = (id) => {
     setMenuOpen(false);
     const element = document.getElementById(id);
     if (!element) return;
     const navbarHeight = document.querySelector(".navbar").offsetHeight;
-    const offsetTop = element.offsetTop - navbarHeight - 20; // 20px padding
-    window.scrollTo({ top: offsetTop, behavior: "smooth" });
+    window.scrollTo({
+      top: element.offsetTop - navbarHeight - 20,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -61,7 +51,7 @@ const Navbar = () => {
         className={`navbar ${isScrolled ? "navbar--scrolled" : ""}`}
         initial={{ y: -80 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 0.8 }}
       >
         <div className="navbar__container">
           {/* Logo */}
@@ -70,43 +60,7 @@ const Navbar = () => {
             <span>Maison</span>
           </div>
 
-          {/* Desktop Links */}
-          <ul className="navbar__links">
-            {SECTIONS.map((id) => (
-              <li key={id}>
-                <button
-                  className={`nav-link ${activeSection === id ? "active" : ""}`}
-                  onClick={() => handleScrollTo(id)}
-                >
-                  {t(`nav.${id}`) || id}
-                </button>
-              </li>
-            ))}
-          </ul>
-
-          {/* Language Switch */}
-          <div className="navbar__lang">
-            <button
-              className={lang === "EN" ? "active" : ""}
-              onClick={() => changeLanguage("EN")}
-            >
-              EN
-            </button>
-            <span>|</span>
-            <button
-              className={lang === "FR" ? "active" : ""}
-              onClick={() => changeLanguage("FR")}
-            >
-              FR
-            </button>
-          </div>
-
-          {/* CTA */}
-          <a href="https://wa.me/2340000000000" className="navbar__cta">
-            {t("nav.cta")}
-          </a>
-
-          {/* Mobile Toggle */}
+          {/* Hamburger */}
           <button
             className="navbar__toggle"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -115,38 +69,54 @@ const Navbar = () => {
             {menuOpen ? <FiX /> : <FiMenu />}
           </button>
         </div>
-      </motion.nav>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.aside
-            className="mobile-menu"
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ duration: 0.4 }}
-          >
-            {SECTIONS.map((id) => (
-              <button
-                key={id}
-                className={`mobile-link ${activeSection === id ? "active" : ""}`}
-                onClick={() => handleScrollTo(id)}
-              >
-                {t(`nav.${id}`) || id}
-              </button>
-            ))}
-
-            <a
-              href="https://wa.me/2340000000000"
-              className="mobile-menu__cta"
-              onClick={() => setMenuOpen(false)}
+        {/* Dropdown Menu */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              className="navbar__dropdown"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
             >
-              {TEXT[language].cta}
-            </a>
-          </motion.aside>
-        )}
-      </AnimatePresence>
+              {SECTIONS.map((id) => (
+                <button
+                  key={id}
+                  className={`dropdown-link ${
+                    activeSection === id ? "active" : ""
+                  }`}
+                  onClick={() => handleScrollTo(id)}
+                >
+                  {t(`nav.${id}`) || id}
+                </button>
+              ))}
+
+              <div className="dropdown-lang">
+                <button
+                  className={lang === "EN" ? "active" : ""}
+                  onClick={() => setLang("EN")}
+                >
+                  EN
+                </button>
+                <button
+                  className={lang === "FR" ? "active" : ""}
+                  onClick={() => setLang("FR")}
+                >
+                  FR
+                </button>
+              </div>
+
+              <a
+                href="https://wa.me/2340000000000"
+                className="dropdown-cta"
+              >
+                {t("nav.cta")}
+              </a>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.nav>
     </>
   );
 };

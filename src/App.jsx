@@ -12,6 +12,7 @@ import Partners from "./component/Partners/Partners";
 import Pricing from "./component/Pricing/Pricing";
 import Testimonials from "./component/Testimonials/Testimonials";
 import StickyContact from "./component/StickyContact/StickyContact";
+import CompanyLocationMap from "./component/Map/Map";
 function App() {
 return (
 	<LanguageProvider>
@@ -25,8 +26,8 @@ return (
 			<Testimonials />
 			<About />
 			<Services />
-
-			<Contact />
+			<Contact />	
+			<CompanyLocationMap />
 			<StickyContact />
 			<Footer /> 
 		</>
