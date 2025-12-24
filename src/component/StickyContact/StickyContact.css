@@ -1,26 +1,61 @@
-.sticky-contact{
-  position:fixed;
-  right:20px;
-  bottom:24px;
-  z-index:1200;
-  background:linear-gradient(180deg,#d6a00b,#084ab6);
-  color:#fff;
-  border:none;
-  padding:12px 14px;
-  border-radius:999px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  box-shadow:0 6px 18px rgba(8,74,182,0.18);
-  cursor:pointer;
+.sticky-contact {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 1200;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: transparent;
+  color: #ffffff;
+
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+
+  box-shadow:
+    inset 0 0 0.5px rgba(255, 255, 255, 0.4),
+    0 6px 16px rgba(0, 0, 0, 0.45);
+
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+
+  transition: background 0.25s ease,
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
 }
 
-.sticky-contact .sticky-label{
-  font-weight:600;
-  font-size:14px;
+/* Hover (desktop only) */
+.sticky-contact:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
-@media (max-width:640px){
-  .sticky-contact .sticky-label{display:none}
-  .sticky-contact{padding:10px;border-radius:50%;}
+/* Label text */
+.sticky-contact .sticky-label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* =========================
+   MOBILE REFINEMENT
+========================= */
+@media (max-width: 640px) {
+  .sticky-contact {
+    padding: 0.7rem;
+    border-radius: 50%;
+  }
+
+  .sticky-contact .sticky-label {
+    display: none;
+  }
 }

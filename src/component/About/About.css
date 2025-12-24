@@ -1,146 +1,124 @@
+/* =========================
+   ABOUT SECTION
+========================= */
 .about {
-  padding: 56px 20px;
+  padding: 5rem 1.5rem;
   background: linear-gradient(180deg, #0b0b0b 0%, #121212 100%);
-  color: var(--color-white);
+  color: #fff;
 }
 
 .about-inner {
-  max-width: var(--container-width);
+  max-width: 1100px;
   margin: 0 auto;
 }
 
+/* =========================
+   HEADING
+========================= */
 .about-heading {
-  font-family: var(--font-heading);
-  color: var(--color-gold);
-  font-size: 2rem;
-  margin-bottom: 8px;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #d4af37;
   text-align: center;
+  margin-bottom: 0.6rem;
 }
 
 .about-mission {
-  color: var(--color-gray);
+  color: #aaa;
   text-align: center;
   max-width: 900px;
-  margin: 0 auto 28px auto;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
 }
 
+/* =========================
+   CORE GRID
+========================= */
 .about-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  margin-bottom: 28px;
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+.about-block {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  padding: 1.4rem;
+  border-radius: 16px;
 }
 
 .about-block h3 {
-  color: var(--color-white);
-  margin-bottom: 8px;
+  color: #fff;
+  margin-bottom: 0.6rem;
+  font-size: 1.05rem;
 }
 
-.about-block p, .about-block ul {
-  color: var(--color-gray);
+.about-block p,
+.about-block ul {
+  color: #aaa;
   margin: 0;
+  font-size: 0.95rem;
 }
 
-.about-block ul { padding-left: 18px; }
+.about-block ul {
+  padding-left: 1.1rem;
+}
 
+/* =========================
+   TEAM SECTION
+========================= */
 .about-team {
-  margin-top: 16px;
+  margin-top: 2rem;
 }
 
 .team-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 12px;
+  gap: 1rem;
+  margin-top: 1.2rem;
 }
 
 .team-card {
   display: flex;
-  gap: 12px;
   align-items: center;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(212,175,55,0.04);
-  padding: 12px;
-  border-radius: 8px;
+  gap: 0.8rem;
+
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+  border-radius: 16px;
 }
 
-.team-avatar svg { width: 64px; height: 64px; }
+.team-avatar svg {
+  width: 52px;
+  height: 52px;
+  color: #d4af37;
+}
 
-.team-name { font-weight: 700; }
-.team-role { color: var(--color-gray); font-size: 0.9rem; }
+.team-name {
+  font-weight: 600;
+}
 
+.team-role {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
 @media (max-width: 900px) {
-  .about-grid, .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-grid,
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 520px) {
-  .about-grid, .team-grid { grid-template-columns: 1fr; }
-}
-.luxury-about {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  font-family: 'Playfair Display', serif;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.luxury-about-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-}
-
-.luxury-about-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 2;
-}
-
-.particle {
-  position: absolute;
-  background: #d4af37;
-  border-radius: 50%;
-  z-index: 3;
-}
-
-.luxury-about-content {
-  position: relative;
-  z-index: 4;
-  max-width: 700px;
-  text-align: center;
-  padding: 2rem;
-}
-
-.luxury-about-content h2 {
-  font-size: 3rem;
-  color: #d4af37;
-  margin-bottom: 1rem;
-}
-
-.luxury-about-content p {
-  color: #fff;
-  margin: 1rem 0;
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
-
-.about-btn {
-  display: inline-block;
-  margin-top: 2rem;
-  padding: 1rem 2rem;
-  background-color: #bfa14b;
-  color: #000;
-  font-weight: bold;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px rgba(212,175,55,0.7);
+  .about-grid,
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
 }
