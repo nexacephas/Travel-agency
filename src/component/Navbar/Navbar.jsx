@@ -15,14 +15,16 @@ const Navbar = () => {
 
   useEffect(() => {
     const onScroll = () => {
-      setIsScrolled(window.scrollY > 60);
+      setIsScrolled(window.scrollY > 50);
 
+      // Optimized Active Section Logic
+      const scrollPos = window.scrollY + 150;
       SECTIONS.forEach((id) => {
         const section = document.getElementById(id);
-        if (!section) return;
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= 120 && rect.bottom >= 120) {
-          setActiveSection(id);
+        if (section) {
+          if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+            setActiveSection(id);
+          }
         }
       });
     };
@@ -38,9 +40,15 @@ const Navbar = () => {
     setMenuOpen(false);
     const element = document.getElementById(id);
     if (!element) return;
-    const navbarHeight = document.querySelector(".navbar").offsetHeight;
+    
+    const offset = 100; // Adjust based on your floating nav height
+    const bodyRect = document.body.getBoundingClientRect().top;
+    const elementRect = element.getBoundingClientRect().top;
+    const elementPosition = elementRect - bodyRect;
+    const offsetPosition = elementPosition - offset;
+
     window.scrollTo({
-      top: element.offsetTop - navbarHeight - 20,
+      top: offsetPosition,
       behavior: "smooth",
     });
   };
@@ -49,20 +57,18 @@ const Navbar = () => {
     <>
       <motion.nav
         className={`navbar ${isScrolled ? "navbar--scrolled" : ""}`}
-        initial={{ y: -80 }}
+        initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="navbar__container">
-          {/* Logo */}
-          <div className="navbar__logo">
-            <GiCrown size={34} />
-            <span>Maison</span>
+          <div className="navbar__logo" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+            <GiCrown size={30} />
+            <span>MAISON</span>
           </div>
 
-          {/* Hamburger */}
           <button
-            className="navbar__toggle"
+            className={`navbar__toggle ${menuOpen ? "is-active" : ""}`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
@@ -70,50 +76,56 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Dropdown Menu */}
+        {/* Full Height Left Drawer */}
         <AnimatePresence>
           {menuOpen && (
-            <motion.div
-              className="navbar__dropdown"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-            >
-              {SECTIONS.map((id) => (
-                <button
-                  key={id}
-                  className={`dropdown-link ${
-                    activeSection === id ? "active" : ""
-                  }`}
-                  onClick={() => handleScrollTo(id)}
-                >
-                  {t(`nav.${id}`) || id}
-                </button>
-              ))}
+            <>
+              {/* Dark Overlay Backdrop */}
+              <motion.div 
+                className="navbar__overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setMenuOpen(false)}
+              />
 
-              <div className="dropdown-lang">
-                <button
-                  className={lang === "EN" ? "active" : ""}
-                  onClick={() => setLang("EN")}
-                >
-                  EN
-                </button>
-                <button
-                  className={lang === "FR" ? "active" : ""}
-                  onClick={() => setLang("FR")}
-                >
-                  FR
-                </button>
-              </div>
-
-              <a
-                href="https://wa.me/2340000000000"
-                className="dropdown-cta"
+              <motion.div
+                className="navbar__drawer"
+                initial={{ x: "-100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "-100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
               >
-                {t("nav.cta")}
-              </a>
-            </motion.div>
+                <div className="drawer__header">
+                   <GiCrown size={40} color="var(--gold)" />
+                </div>
+
+                <div className="drawer__links">
+                  {SECTIONS.map((id) => (
+                    <button
+                      key={id}
+                      className={`drawer-link ${activeSection === id ? "active" : ""}`}
+                      onClick={() => handleScrollTo(id)}
+                    >
+                      <span className="link-number">0{SECTIONS.indexOf(id) + 1}</span>
+                      {t(`nav.${id}`) || id}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="drawer__footer">
+                  <div className="drawer-lang">
+                    <button className={lang === "EN" ? "active" : ""} onClick={() => setLang("EN")}>EN</button>
+                    <span className="separator">|</span>
+                    <button className={lang === "FR" ? "active" : ""} onClick={() => setLang("FR")}>FR</button>
+                  </div>
+                  
+                  <a href="https://wa.me/2340000000000" className="drawer-cta">
+                    {t("nav.cta")}
+                  </a>
+                </div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </motion.nav>

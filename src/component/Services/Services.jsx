@@ -5,66 +5,84 @@ import "./Services.css";
 
 const servicesData = [
   {
-    icon: <FiGlobe size={48} />,
+    icon: <FiGlobe />,
     title: "Travel Concierge",
-    description: "Plan your trips, book flights & luxury stays, and enjoy seamless travel experiences.",
-    bg: "linear-gradient(135deg, #000000, #1c1c1c)"
+    description: "Bespoke itineraries, private aviation, and curated stays at the world's most exclusive destinations.",
   },
   {
-    icon: <FiCoffee size={48} />,
+    icon: <FiCoffee />,
     title: "Lifestyle Management",
-    description: "We handle your daily tasks, reservations, and exclusive experiences with elegance.",
-    bg: "linear-gradient(135deg, #0d0d0d, #2a2a2a)"
+    description: "Our dedicated specialists handle your daily essentials with absolute discretion and elegance.",
   },
   {
-    icon: <FiTruck size={48} />,
+    icon: <FiTruck />,
     title: "Event Coordination",
-    description: "Luxury events perfectly managed with attention to every fine detail.",
-    bg: "linear-gradient(135deg, #111, #333)"
+    description: "From private galas to intimate celebrations, we orchestrate every detail to perfection.",
   },
   {
-    icon: <FiGift size={48} />,
+    icon: <FiGift />,
     title: "Personal Shopping",
-    description: "Get exclusive products, gifts, and services tailored to your taste.",
-    bg: "linear-gradient(135deg, #0a0a0a, #222)"
+    description: "Access to rare collections, limited editions, and private viewing sessions worldwide.",
   },
 ];
+
+// Animation Variants for a professional feel
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.8, ease: "easeOut" } 
+  },
+};
 
 const LuxuryServices = () => {
   return (
     <section className="luxury-services" id="services">
-      <motion.div
-        className="luxury-services-header"
-        initial={{ opacity: 0, y: -50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-      >
-        <h2>Our Ultra-Premium Services</h2>
-        <p>Experience unparalleled luxury with services crafted for your lifestyle.</p>
-      </motion.div>
+      <div className="luxury-services-inner">
+        <motion.div
+          className="luxury-services-header"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <span className="gold-subtitle">Our Expertise</span>
+          <h2>Ultra-Premium Services</h2>
+          <div className="header-line"></div>
+        </motion.div>
 
-      <div className="luxury-services-container">
-        {servicesData.map((service, i) => (
-          <motion.div
-            className={`service-slice slice-${i}`}
-            key={i}
-            initial={{ opacity: 0, x: i % 2 === 0 ? -200 : 200, scale: 0.9 }}
-            whileInView={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 1, delay: i * 0.3 }}
-            style={{ background: service.bg }}
-            whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(212,175,55,0.7)" }}
-          >
+        <motion.div
+          className="luxury-services-grid"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {servicesData.map((service, i) => (
             <motion.div
-              className="service-icon"
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 4 }}
+              className="service-card"
+              key={i}
+              variants={itemVariants}
+              whileHover={{ y: -10 }}
             >
-              {service.icon}
+              <div className="service-icon-wrapper">
+                {service.icon}
+              </div>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+              <div className="card-border-gradient"></div>
             </motion.div>
-            <h3>{service.title}</h3>
-            <p>{service.description}</p>
-          </motion.div>
-        ))}
+          ))}
+        </motion.div>
       </div>
     </section>
   );

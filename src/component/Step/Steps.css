@@ -139,26 +139,72 @@
   line-height: 1.6;
 }
 
-/* Responsive */
+/* Responsive Mobile Optimization */
 @media (max-width: 768px) {
-  .timeline-step {
-    width: 100%;
-    text-align: left !important;
-    padding-left: 4rem;
-    padding-right: 1rem;
+  .steps-container h2 {
+    font-size: 2.2rem;
     margin-bottom: 3rem;
   }
 
-  .timeline-line {
-    left: 20px;
+  .timeline {
+    width: 100%;
+    padding-left: 10px; /* Space for the line */
   }
 
+  /* Move the line to the left side */
+  .timeline-line {
+    left: 35px; /* Half of the icon width (70px / 2) */
+    transform: none;
+  }
+
+  .timeline-step {
+    width: 100%;
+    left: 0 !important; /* Forces right-side steps to move back to the left */
+    text-align: left !important;
+    padding: 0 0 3rem 85px; /* Space for the icon + line */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Position the icon relative to the step container */
   .timeline-icon {
     position: absolute;
     left: 0;
+    top: 0;
+    width: 60px; /* Slightly smaller for mobile */
+    height: 60px;
+    font-size: 1.2rem;
+    margin: 0 !important; /* Remove desktop margins */
   }
 
+  /* The Card Content */
   .timeline-content {
-    display: block;
+    max-width: 100%;
+    width: 100%;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.08); /* Slightly more visible on mobile */
   }
+
+  .timeline-content h3 {
+    font-size: 1.3rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.95rem;
+  }
+}
+
+/* Extra small screens (Phones under 400px) */
+@media (max-width: 400px) {
+    .timeline-step {
+        padding-left: 70px;
+    }
+    .timeline-icon {
+        width: 50px;
+        height: 50px;
+    }
+    .timeline-line {
+        left: 25px;
+    }
 }
